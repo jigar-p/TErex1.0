@@ -19,7 +19,11 @@ elements to identify and study.
 
 ## Installation
 1. Clone the repository wherever you want to install the tools
-2. Run 'python main.py --tester' to see if everything has been installed correctly!
+2. Run the following command to see if everything has been installed correctly!
+
+```
+python main.py --tester
+```
 
 Feel free to explore what our options do by running:
 python main.py -h
