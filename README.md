@@ -27,13 +27,12 @@ python main.py -h
 ## Dependencies
 
 Here's a list of dependencies that TErex requires to run!
-Python 2.7
-Python package Numpy
-Python package os
-Python package sys
-Python package re
-Python package argparse
-Python package subprocess
-Dfam.hmm
-nhmmer through hmmer3.1
-dfamscan.pl & perl
+1. Python 2.7
+2. Python package Numpy
+3. Python package os
+4. Python package sys
+5. Python package re
+6. Python package argparse
+7. Python package subprocess
+8. nhmmer through hmmer3.1
+9. perl
