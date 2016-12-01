@@ -25,7 +25,6 @@ Feel free to explore what our options do by running:
 python main.py -h
 
 ## Dependencies
-
 Here's a list of dependencies that TErex requires to run!
 1. Python 2.7
 2. Python package Numpy
