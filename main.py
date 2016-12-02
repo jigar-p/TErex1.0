@@ -91,7 +91,7 @@ def main():
     dfamscanPath = os.path.join(basePath, "dfamscan.pl")
     args_str = "perl %s -fastafile %s -hmmfile %s -dfam_outfile %s -E %s" % (dfamscanPath, fastafile, dfampath, dfamRaw, evt)
     args = args_str.split()
-    print args
+    #print args
     if subprocess.call(args) != 0:
         sys.exit(2)
     print ("Dfam finished!")
