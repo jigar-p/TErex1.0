@@ -24,7 +24,7 @@ def parse_args(args):
 def main():
 
     if '--tester' in sys.argv:
-        args_test = "python main.py ./Test/test.fa ./Test/DfamSubset.hmm ./Test -families ./Test/family"
+        args_test = "python main.py ./Test/test.fa ./Test/DfamSubset.hmm ./Test"
         args = args_test.split()
         subprocess.call(args)
         sys.exit()
