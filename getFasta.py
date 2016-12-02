@@ -7,6 +7,7 @@ qu = 4
 ci = 5
 nu = 9
 dz = 10
+ds = 14
 
 def updateFasta( dfamOutFile, fastaFile, outputFile ) :
     #Read in file from dfam output
@@ -51,10 +52,11 @@ def buildFastaString( fastafile, values ) :
     bias = values[ci]
     st = values[nu]
     en = values[dz]
+    descrip = values[ds]
     length = int(en)-int(st)
 
     #Format string
-    output = ">" + name + ";" + acc + ";" + bits + ";" + e_val + ";"
+    output = ">" + name + ";" + acc + ";" + bits + ";" + e_val + ";" + st + ";" + en + ";" + descrip + ";"
 
     #Forward strand
     if length > 0 :

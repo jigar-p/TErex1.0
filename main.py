@@ -108,6 +108,7 @@ def main():
     print ("Creating final fasta file")
     finalFile = os.path.join(fastaPath, "filteredFasta.fa")
     updateFasta(dfamScreen2, fastafile, finalFile)
+    print ("Files outputted in the following directory: %s" % outputPath)
     print ("Completed!")
 
 
