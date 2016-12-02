@@ -85,7 +85,9 @@ def main():
     print ("Dfam running... (this may take a while)")
     args_str = "perl dfamscan.pl -fastafile %s -hmmfile %s -dfam_outfile %s -E %s" % (fastafile, dfampath, dfamRaw, evt)
     args = args_str.split()
-    subprocess.call(args)
+    if subprocess.call(args) != 0:
+        print("Error found!")
+        sys.exit(2)
     print ("Dfam finished!")
 
     #conduct family screen
