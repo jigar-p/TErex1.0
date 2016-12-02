@@ -11,10 +11,10 @@ from getFasta import updateFasta
 def parse_args(args):
     ###### Command Line Argument Parser
     parser = argparse.ArgumentParser(description="Check the help flag")
-    parser.add_argument('fastafile', help='Path to the fasta file to run TErex on')
-    parser.add_argument('dfamPath', help='Path to the Dfam database that would like to be used')
-    parser.add_argument('outputPath', help='Path that you would like the outputted files to be outputted to')
-    parser.add_argument('-families', help='Path to the text file with list of families that you want filtered. If no option is chosen, every family will be displayed. Format of the file should be a line of family names separated by commas. Example file is provided in TErex1.0/test/family_example')
+    parser.add_argument('--fastafile', help='Path to the fasta file to run TErex on')
+    parser.add_argument('--dfamPath', help='Path to the Dfam database that would like to be used')
+    parser.add_argument('--outputPath', help='Path that you would like the outputted files to be outputted to')
+    parser.add_argument('--families', help='Path to the text file with list of families that you want filtered. If no option is chosen, every family will be displayed. Format of the file should be a line of family names separated by commas. Example file is provided in TErex1.0/test/family_example')
     parser.add_argument('--bitscoreThreshold', help='Input the value of the SMALLEST bitscore you would want to obtain. i.e. if a value of 30 is chosen, every bitscore below 30 will be thrown out. If no value is chosen, our default method which chooses every bitscore >= mean - onestandard deviation', type=int)
     parser.add_argument('--evalueThreshold', help='Input the value of the SMALLEST evalue you would accept. i.e. if an evalue of 1e-30 is chosen, every e-value below 1e-30 will be thrown out (this is WAY too stringent). If no value is specified an evalue of 0.01 is chosen', type=float)
     parser.add_argument('--tester', help='Test that everything is working fine. The test method will be to run: python main.py ./Test/test.fa ./Test/DfamSubset.hmm ./Test', action='store_true')
@@ -23,13 +23,18 @@ def parse_args(args):
 
 def main():
 
-    if '--tester' in sys.argv:
-        args_test = "python main.py ./Test/test.fa ./Test/DfamSubset.hmm ./Test"
-        args = args_test.split()
-        subprocess.call(args)
-        sys.exit()
-
     args = parse_args(sys.argv[1:])
+
+    #check if tester option and screen for mandated options
+    basePath = os.path.split(sys.argv[0])[0]
+    if args.tester:
+        args.fastafile = os.path.join(basePath, "Test", "test.fa")
+        args.dfamPath = os.path.join(basePath, "Test", "DfamSubset.hmm")
+        args.outputPath = os.path.join(basePath, "Test")
+    else:
+        assert args.fastafile != None, "You did not specify a fasta file silly!"
+        assert args.dfamPath != None, "You did not specify a path to the Dfam database!"
+        assert args.outputPath != None, "You did not specify an outputPath!"
 
     #get fasta file to read
     fastafile = args.fastafile
@@ -59,7 +64,7 @@ def main():
         evt = 0.01
 
     #Create output file directory structures
-    outputPath = os.path.join(args.outputPath, 'Output')
+    outputPath = os.path.join(args.outputPath, "Output")
     try:
         os.makedirs(outputPath)
     except OSError:
@@ -83,8 +88,10 @@ def main():
 
     #run dfamscan.pl w/ evalue threshold
     print ("Dfam running... (this may take a while)")
-    args_str = "perl dfamscan.pl -fastafile %s -hmmfile %s -dfam_outfile %s -E %s" % (fastafile, dfampath, dfamRaw, evt)
+    dfamscanPath = os.path.join(basePath, "dfamscan.pl")
+    args_str = "perl %s -fastafile %s -hmmfile %s -dfam_outfile %s -E %s" % (dfamscanPath, fastafile, dfampath, dfamRaw, evt)
     args = args_str.split()
+    print args
     if subprocess.call(args) != 0:
         sys.exit(2)
     print ("Dfam finished!")
