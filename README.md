@@ -46,6 +46,6 @@ Here's a list of dependencies that TErex requires to run!
 4. perl
 
 If you would like to download the whole Dfam database locally, you may use the link found here:
-'''
+,,,
 http://dfam.org/web_download/Current_Release/Dfam.hmm.gz
-'''
+,,,
