@@ -43,8 +43,10 @@ def bitscore(file, threshold, output):
 
 #calculates the threshold of the bitscore if none provided
 def defaultThreshold(list):
-    avg = np.mean(list)
-    stdev = np.std(list)
+    med = np.median(list)
+    q3 = np.percentile(list, 75)
+    q1 = np.percentile(list, 25)
+    iqr = q3 - q1
 
-    threshold = avg - stdev
+    threshold = med - iqr
     return threshold
