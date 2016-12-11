@@ -41,12 +41,12 @@ def bitscore(file, threshold, output):
         k += 1
     outputFile.close()
 
-#calculates the threshold of the bitscore if none provided
+# calculates the threshold of the bitscore if none provided
+# filters out outliers
 def defaultThreshold(list):
-    med = np.median(list)
     q3 = np.percentile(list, 75)
     q1 = np.percentile(list, 25)
     iqr = q3 - q1
 
-    threshold = med - iqr
+    threshold = q1 - (iqr * 1.5)
     return threshold
