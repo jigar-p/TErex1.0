@@ -1,4 +1,4 @@
-# TErex - A tool brought to you by CSE 180's final project 
+# TErex1.0 - A tool brought to you by CSE 180's final project 
 ### By Jenny Lee, Jigar Patel, Lowan Kim, and Arya Kaul
 
 
